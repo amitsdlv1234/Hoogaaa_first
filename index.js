@@ -43,6 +43,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define your routes
+app.get('/', (req, res) => {
+  res.send('api running new deploy');
+});
+
 app.use('/signIn',userSignIn);
 app.use('/userRouter', userRouter);
 app.use('/organizationroute', organizationroute);
