@@ -62,10 +62,6 @@ app.use('/assignAssetsroute', assignAssetsroute);
 app.use('/replacementRequestroute', replacementRequestroute);
 app.use('/requestNewAssetsroute', requestNewAssetsroute);
 
-console.log(process.env.DB_USERNAME);
-console.log(process.env.DB_DATABASENAME);
-console.log(process.env.DB_PASSWORD);
-console.log(process.env.DB_HOST);
 (async () => {
   try {
     await Connection.authenticate();

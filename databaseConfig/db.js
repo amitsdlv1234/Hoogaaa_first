@@ -9,7 +9,7 @@ const host = process.env.DB_HOST;
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'mysql'
+  dialect: 'mysql2'
 });
 
 export default sequelize;
