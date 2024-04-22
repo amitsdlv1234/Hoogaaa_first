@@ -96,6 +96,7 @@ export const accountVerification = async (req, res) => {
       return res.status(200).json({
         message: "Enter the OTP sent to your mobile number",
         token: tokenForMobile,
+        mobileOtp:mobileOtp 
       });
     } else if (emailId) {
       const signInEmail = await signIn.findOne({ where: { emailId: emailId } });
@@ -133,6 +134,7 @@ export const accountVerification = async (req, res) => {
       return res.status(200).json({
         message: "Enter the OTP sent to your email address",
         token: tokenForEmail,
+        emailOtp:emailOtp
       });
     } else {
       return res.status(400).json({ msg: "Please provide mobileNo or emailId" });
@@ -291,7 +293,7 @@ export const login = async (req, res) => {
 
         // Generate the JWT token with 1 hour expiration for mobile
         token = jwt.sign(payloadForMobile, secretKey, { expiresIn: "1h" });
-        return res.status(201).json({ message: "Verify your mobile number", token });
+        return res.status(201).json({ message: "Verify your mobile number",mobileOtp:mobileOtp, token:token});
       }
 
     } else {
@@ -327,7 +329,7 @@ export const login = async (req, res) => {
 
         // Generate the JWT token with 1 hour expiration for email
         token = jwt.sign(payloadForEmail, secretKey, { expiresIn: "1h" });
-        return res.status(201).json({ message: "Verify your email", token });
+        return res.status(201).json({ message: "Verify your email", token ,emailOtp:emailOtp});
       }
     }
   } catch (error) {
@@ -391,7 +393,7 @@ export const changePasswordRequest = async (req, res) => {
    // Return the JWT token
    res
      .status(200)
-     .json({ msg: "Opt send on mobile no. " + sign.mobileNo, token });
+     .json({ msg: "Opt send on mobile no. " + sign.mobileNo, token ,otpgen:otpgen});
       }
   }  
 
