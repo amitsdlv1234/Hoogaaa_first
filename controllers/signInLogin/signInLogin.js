@@ -432,19 +432,20 @@ export const changesignInpassword = async (req, res) => {
     const { mobileNo, emailId, newPassword } = req.body;
     // Hash the password
     const hash_password = await bcrypt.hash(newPassword, 10);
+    let passupdate=null;
     if (mobileNo) {
-      await signIn.update(
+     passupdate= await signIn.update(
         { password: hash_password },
         { where: { mobileNo: mobileNo } }
       );
     }
     if (emailId) {
-      await signIn.update(
+      passupdate=await signIn.update(
         { password: hash_password },
         { where: { emailId: emailId } }
       );
     }
-
+    if(!passupdate) res.status(200).json({ msg: "password not updated" });
     res.status(200).json({ msg: "password updated" });
   } catch (error) {
     console.log(error);
